@@ -1,11 +1,12 @@
 package repo
 
 import (
+	"log"
+
 	"github.com/Zubayear/song-store/entity"
 	_ "github.com/go-sql-driver/mysql"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"log"
 )
 
 type SongRepository interface {
@@ -21,15 +22,15 @@ type database struct {
 }
 
 func NewSongRepository() SongRepository {
-	// db, err := gorm.Open("mysql", "root@tcp(127.0.0.1)/song_db?charset=utf8")
-	dsn := "root:@tcp(127.0.0.1:3306)/songdb?charset=utf8&parseTime=true"
+	dsn := "root:root@tcp(127.0.0.1:3306)/?charset=utf8&parseTime=true"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db.Exec("CREATE DATABASE IF NOT EXISTS " + "songdb").Exec("USE " + "songdb")
 	if err != nil {
 		panic("failed to connect to database")
 	}
 	err = db.AutoMigrate(&entity.Song{})
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalf("db.AutoMigrate: %v", err)
 		return nil
 	}
 	return &database{
@@ -60,9 +61,15 @@ func (d *database) UpdateSong(song *entity.Song, songID uint) (*entity.Song, err
 	if err := result.Error; err != nil {
 		return nil, err
 	}
-	updatedSong.SongName = song.SongName
-	updatedSong.SongDuration = song.SongDuration
-	updatedSong.SongHits = song.SongHits
+	if updatedSong.SongName == "" {
+		updatedSong.SongName = song.SongName
+	}
+	if updatedSong.SongDuration == 0 {
+		updatedSong.SongDuration = song.SongDuration
+	}
+	if updatedSong.SongHits == 0 {
+		updatedSong.SongHits = song.SongHits
+	}
 	update := d.dbConn.Save(&updatedSong)
 	if err := update.Error; err != nil {
 		return nil, err

@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "0a8cd8b6-de21-4241-bd5b-3fbc86d418c0",
+		"name": "GO WEB SERVICE ENDPOINT COLLECTION",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET A SONG",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000/songs/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"songs",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST SONG Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"song_name\": \"Middle Child\",\n    \"song_duration\": 3.33,\n    \"song_hits\": 769178815\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9000/songs",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE A SONG",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"song_duration\": 3.33,\n    \"song_hits\": 769178815\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9000/songs/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"songs",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE A SONG",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000/songs/4",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"songs",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
