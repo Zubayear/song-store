@@ -1,0 +1,22 @@
+type Song {
+  id: Int!
+  songName: String!
+  songDuration: Float!
+  songHits: Int!
+}
+
+input SongInput {
+  songName: String!
+  songDuration: Float!
+  songHits: Int!
+}
+
+type Query {
+  getSong(id: Int!): Song
+}
+
+type Mutation {
+  createSong(input: SongInput!): Song
+  updateSong(input: SongInput!): Song
+  deleteSong(id: Int!): String
+}

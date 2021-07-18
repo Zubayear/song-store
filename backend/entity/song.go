@@ -2,10 +2,18 @@ package entity
 
 import "gorm.io/gorm"
 
+// type Song struct {
+// 	gorm.Model   `json:"-"`
+// 	ID           uint
+// 	SongName     string  `json:"song_name"`
+// 	SongDuration float32 `json:"song_duration"`
+// 	SongHits     int64   `json:"song_hits"`
+// }
+
 type Song struct {
 	gorm.Model   `json:"-"`
-	ID           uint
-	SongName     string  `json:"song_name"`
-	SongDuration float32 `json:"song_duration"`
-	SongHits     int64   `json:"song_hits"`
+	ID           uint    `json:"id"`
+	SongName     string  `json:"songName"`
+	SongDuration float64 `json:"songDuration"`
+	SongHits     int     `json:"songHits"`
 }

@@ -22,7 +22,7 @@ type database struct {
 }
 
 func NewSongRepository() SongRepository {
-	dsn := "root:root@tcp(127.0.0.1:3306)/?charset=utf8&parseTime=true"
+	dsn := "root:@tcp(127.0.0.1:3306)/?charset=utf8&parseTime=true"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	db.Exec("CREATE DATABASE IF NOT EXISTS " + "songdb").Exec("USE " + "songdb")
 	if err != nil {
